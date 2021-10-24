@@ -4,121 +4,32 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Moussa's GPU Store</title>
+        <title>Card Depot</title>
         <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet"
+        />
     </head>
     <body>
         <div class="navbar">
             <div class="logo-container">
-                <h1>Moussa's GPU Shop</h1>
+                <img
+                    class="logo"
+                    src="assets/images/site-logo.svg"
+                    alt="Card Depot Logo"
+                />
+                <h1>Card Depot</h1>
             </div>
-            <div class="nav-btns-container">
-                <a>AMD</a>
-                <a>NVIDIA</a>
-                <a>Contact Us</a>
-            </div>
-        </div>
-        <div class="main-content">
-            <div class="hero">
-                <div class="hero-text-container">
-                    <h1>Your one-stop shop for everything graphics.</h1>
-                </div>
-            </div>
-
-            <div class="offerings-section">
-                <h1>High-end Cards</h1>
-                <div class="cards-container">
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <img
-                                    class="card-front-image"
-                                    src="assets/images/radeon-card-bg.png"
-                                />
-                            </div>
-                            <div class="card-back"></div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <img
-                                    class="card-front-image"
-                                    src="assets/images/rtx-card-bg.png"
-                                />
-                            </div>
-                            <div class="card-back"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="reviews-section">
-                <div class="reviews-carousel">
-                    <h2>Users Reviews</h2>
-                    <input
-                        type="radio"
-                        name="reviews-radio"
-                        id="radio-1"
-                        checked
-                    />
-                    <input type="radio" name="reviews-radio" id="radio-2" />
-                    <input type="radio" name="reviews-radio" id="radio-3" />
-                    <input type="radio" name="reviews-radio" id="radio-4" />
-                    <ul class="reviews">
-                        <li class="slide">
-                            <div class="slide-content">
-                                <p>
-                                    Moussa's GPU Store is the best GPU store
-                                    ever!
-                                </p>
-
-                                <img
-                                    class="review-author-img"
-                                    src="https://i.pravatar.cc/150"
-                                />
-                                <p>Moussa Haidous</p>
-                            </div>
-                        </li>
-                        <li class="slide">
-                            <p>
-                                <q
-                                    >Moussa's GPU Store is the best GPU store
-                                    ever!</q
-                                >
-                                <span class="author">
-                                    <img src="https://i.pravatar.cc/150" />
-                                    Moussa Haidous
-                                </span>
-                            </p>
-                        </li>
-                        <li class="slide">
-                            <p>
-                                <q
-                                    >Moussa's GPU Store is the best GPU store
-                                    ever!</q
-                                >
-                                <span class="author">
-                                    <img src="https://i.pravatar.cc/150" />
-                                    Moussa Haidous
-                                </span>
-                            </p>
-                        </li>
-                        <li class="slide">
-                            <p>
-                                <q
-                                    >Moussa's GPU Store is the best GPU store
-                                    ever!</q
-                                >
-                                <span class="author">
-                                    <img src="https://i.pravatar.cc/150" />
-                                    Moussa Haidous
-                                </span>
-                            </p>
-                        </li>
-                    </ul>
-                </div>
+            <div class="navbar-btns-container">
+                <a href="/amd-cards" class="navbar-amd-btn">AMD</a>
+                <a href="/nvidia-cards" class="navbar-nvidia-btn">Nvidia</a>
+                <a href="/contact-us" class="navbar-contactus-btn"
+                    >Contact Us</a
+                >
             </div>
         </div>
-        <div class="footer"></div>
     </body>
 </html>
