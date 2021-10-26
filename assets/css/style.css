@@ -6,6 +6,14 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    box-shadow: 1px 2px 25px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+}
+
 .navbar {
     width: 100%;
     height: 80px;
@@ -13,6 +21,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .logo {
@@ -31,7 +40,8 @@ body {
 .navbar-btns-container {
     padding: 25px;
 }
-.navbar-btns-container a {
+
+.cta-btn {
     margin: 0px 10px;
     text-decoration: none;
     color: #fff;
@@ -66,4 +76,280 @@ body {
 .navbar-contactus-btn:hover {
     background: #fff;
     color: #000 !important;
+}
+
+.hero-inner {
+    display: inline-block;
+    position: relative;
+}
+
+.hero-section video {
+    width: 100%;
+    min-height: 100%;
+}
+
+.hero-content {
+    color: #fff;
+    font-size: 4rem;
+    margin: 75px;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.hero-content p {
+    margin-bottom: 25px;
+}
+
+.hero-content p span {
+    text-decoration: underline;
+}
+
+.hero-content p span:hover {
+    display: inline-block;
+    transform: scale(1.4);
+    background-color: white;
+    color: #000;
+}
+
+.hero-content a {
+    text-decoration: none;
+    color: #000;
+    border-radius: 15px;
+    font-size: 3rem;
+    background: white;
+    padding: 10px 20px;
+}
+
+.hero-content a:hover {
+    display: inline-block;
+
+    transform: translateY(-13px);
+}
+
+.hero-content a:active {
+    display: inline-block;
+    transform: translateY(0px);
+}
+
+.overview-container,
+.overview {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.overview {
+    border-radius: 25px;
+    width: fit-content;
+}
+
+.overview-container h1 {
+    font-size: 5rem;
+    margin: 15px;
+    background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+}
+
+.offerings-section {
+    background: #000;
+    background-blend-mode: multiply;
+    padding: 25px;
+    min-height: 500px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.offerings-section h1 {
+    font-size: 4rem;
+    margin: 15px;
+}
+
+.cards-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 60%;
+}
+
+.card {
+    background-color: transparent;
+    width: 300px;
+    height: 400px;
+    perspective: 999px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.75s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+}
+
+.card-front {
+    background-color: #bbb;
+    color: black;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.amd-card {
+    background-color: #970a1b;
+}
+
+.amd-card a {
+    background: #fff;
+    color: #000;
+    border: none !important;
+}
+
+.nvidia-card {
+    background-color: #75b900;
+}
+
+.nvidia-card a {
+    background: #fff;
+    color: #000;
+    border: none !important;
+}
+
+.card-front-image {
+    width: 100%;
+    height: 100%;
+}
+
+.reviews-section {
+    width: 100%;
+    min-height: 400px;
+}
+
+.reviews-carousel {
+    background: #ffffff;
+    text-align: center;
+    padding: 2rem 0;
+    height: 100%;
+    max-width: 80%;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+.reviews-carousel h1 {
+    background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 4rem;
+}
+.reviews {
+    width: 400%;
+    left: 0;
+    padding-left: 0;
+    padding-top: 1em;
+    overflow: hidden;
+    list-style: none;
+    position: relative;
+
+    transition: transform 0.5s;
+}
+.reviews li {
+    width: 25%;
+    position: relative;
+    float: left;
+}
+.slide-content {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-author-img {
+    border-radius: 50%;
+    max-height: 150px;
+    max-width: 150px;
+}
+
+.slide-content p:first-child {
+    color: #000;
+    font-size: 1.5rem;
+}
+
+.slide-content p:last-child {
+    background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.25rem;
+}
+
+#radio-1:checked ~ .reviews {
+    transform: translateX(0%);
+}
+#radio-2:checked ~ .reviews {
+    transform: translateX(-25%);
+}
+#radio-3:checked ~ .reviews {
+    transform: translateX(-50%);
+}
+#radio-4:checked ~ .reviews {
+    transform: translateX(-75%);
+}
+
+.footer {
+    height: 100px;
+    width: 100%;
+    /* background-color: #000; */
+    border-radius: 0px 0px 10px 10px;
+    position: relative;
+}
+
+.footer video {
+    width: 100%;
+    max-height: 100px;
+    object-fit: cover;
+    border-radius: 0px 0px 10px 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-content {
+    position: absolute;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
 }
