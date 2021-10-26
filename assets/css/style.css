@@ -49,23 +49,23 @@ body {
     border-radius: 10px;
     padding: 10px 30px;
     font-size: 1.15rem;
+    transition: all 0.4s ease-in-out;
 }
 
-.navbar-amd-btn {
-    background: #970a1b;
+.cta-btn:hover {
+    display: inline-block;
+    transform: translateY(-5px);
+    transition: all 0.4s ease-in-out;
 }
 
-.navbar-amd-btn:hover {
-    background: #970a1ab6;
+.cta-btn:active {
+    transform: translateY(0px);
+    transition: all 0.4s ease-in-out;
+    background-position: 100% 0;
 }
 
-.navbar-nvidia-btn {
-    background: #75b900;
-    color: #000 !important;
-}
-
-.navbar-nvidia-btn:hover {
-    background: #75b900bd;
+.navbar-shop-btn {
+    background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
 }
 
 .navbar-contactus-btn {
@@ -109,6 +109,8 @@ body {
 .hero-content p span:hover {
     display: inline-block;
     transform: scale(1.4);
+    transition: all 0.4s ease-in-out;
+
     background-color: white;
     color: #000;
 }
@@ -126,11 +128,13 @@ body {
     display: inline-block;
 
     transform: translateY(-13px);
+    transition: all 0.4s ease-in-out;
 }
 
 .hero-content a:active {
     display: inline-block;
     transform: translateY(0px);
+    transition: all 0.4s ease-in-out;
 }
 
 .overview-container,
@@ -423,4 +427,174 @@ body {
 
 .footer-content > div {
     width: 300px;
+}
+
+/*Shop Page*/
+
+.shop-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.shop-section h1 {
+    background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3rem;
+}
+
+.listing-container {
+    width: 100%;
+    height: 500px;
+    margin: 15px;
+    box-shadow: 1px 2px 25px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 20% 1fr;
+}
+
+.filters-container {
+    border-right: 1px solid #000;
+    font-size: 1.25rem;
+    padding: 25px;
+}
+
+.filters-container div {
+    margin: 15px 0px;
+}
+
+.brand-filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.brand-filter input {
+    margin: 10px;
+}
+
+.price-filter label {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.columns-count label {
+    cursor: pointer;
+    margin: 25px;
+}
+
+.products-container {
+    overflow: scroll;
+}
+
+.products-container input[type="radio"] {
+    display: none;
+}
+.products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow: scroll;
+    row-gap: 30px;
+    margin: 15px 0px;
+    place-items: center;
+}
+
+.product-container {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.product-container.amd-product {
+    border: 3px solid #970a1b;
+}
+
+.product-container.nvidia-product {
+    border: 3px solid #76b900;
+}
+
+.product-container img {
+    height: 150px;
+    transition: all 0.4s ease-in-out;
+}
+
+.product-container img:hover {
+    transform: scale(1.4);
+    transition: all 0.4s ease-in-out;
+}
+
+.product-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.33rem;
+}
+
+.product-details .title {
+    font-size: 1.5rem;
+}
+.product-container.amd-product .price {
+    color: #970a1b;
+}
+
+.product-container.nvidia-product .price {
+    color: #76b900;
+}
+
+.product-container button {
+    padding: 10px 25px;
+    font-size: 1.25rem;
+    border: none;
+    margin: 25px 0px;
+    cursor: pointer;
+}
+
+.product-container button:hover {
+    transform: translateY(-5px);
+    transition: all 0.4s ease-in-out;
+}
+.product-container button:active {
+    transform: translateY(0px);
+    transition: all 0.4s ease-in-out;
+}
+
+.product-container.amd-product button {
+    background: #970a1b;
+    color: #fff;
+}
+
+.product-container.nvidia-product button {
+    background: #76b900;
+    color: #fff;
+}
+
+.product-container.out-of-stock button {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.product-container.out-of-stock button:hover {
+    transform: none;
+}
+#cols-1:checked ~ .products {
+    grid-template-columns: 1fr;
+}
+#cols-2:checked ~ .products {
+    grid-template-columns: 1fr 1fr;
+}
+#cols-3:checked ~ .products {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#cols-1:checked ~ .products .product-container {
+    width: 450px;
+    height: 450px;
 }
