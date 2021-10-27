@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Shop</title>
+        <link
+            rel="icon"
+            type="image/svg"
+            href="../assets/images/site-logo.svg"
+        />
+        <link rel="stylesheet" href="../assets/css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="logo-container">
+                <a href="/" style="text-decoration: none; color: white">
+                    <img
+                        class="logo"
+                        src="../assets/images/site-logo.svg"
+                        alt="Card Depot Logo"
+                    />
+                </a>
+                <a href="/" style="text-decoration: none; color: white"
+                    ><h1>Card Depot</h1></a
+                >
+            </div>
+            <div class="navbar-btns-container">
+                <a href="/shop" class="cta-btn navbar-shop-btn">Shop</a>
+
+                <a href="/contact-us" class="cta-btn navbar-contactus-btn"
+                    >Contact Us</a
+                >
+            </div>
+        </div>
+        <div class="shop-section">
+            <h1>Find the card YOU want.</h1>
+            <div class="listing-container">
+                <div class="filters-container">
+                    <div class="brand-filter">
+                        <h4>Filter by Brand</h4>
+                        <label for="amd"
+                            ><input
+                                type="checkbox"
+                                name="brand"
+                                id="amd"
+                            />AMD</label
+                        >
+                        <label for="nvidia"
+                            ><input
+                                type="checkbox"
+                                name="brand"
+                                id="nvidia"
+                            />NVIDIA</label
+                        >
+                    </div>
+                    <div class="price-filter">
+                        <h4>Filter by Price</h4>
+                        <label for="price"
+                            >$0.00
+                            <input type="range" id="price" /> $3,200.00</label
+                        >
+                    </div>
+                    <div class="columns-count">
+                        <h4>Number of Columns</h4>
+                        <label for="cols-1"
+                            ><i class="fas fa-square"></i
+                        ></label>
+                        <label for="cols-2"
+                            ><i class="fas fa-columns"></i
+                        ></label>
+                        <label for="cols-3"><i class="fas fa-th"></i></label>
+                    </div>
+                </div>
+                <div class="products-container">
+                    <input type="radio" name="columns-count" id="cols-1" />
+
+                    <input type="radio" name="columns-count" id="cols-2" />
+
+                    <input
+                        type="radio"
+                        name="columns-count"
+                        id="cols-3"
+                        checked
+                    />
+
+                    <div class="products">
+                        <div class="product-container amd-product">
+                            <img
+                                src="../assets/images/radeon-6900xt.jpeg"
+                                alt=""
+                            />
+                            <div class="product-details">
+                                <p class="title">RX 6900xt</p>
+                                <p class="price">$1,300.00</p>
+                            </div>
+                            <button>Buy Now</button>
+                        </div>
+                        <div class="product-container nvidia-product">
+                            <img src="../assets/images/rtx-3090.png" alt="" />
+                            <div class="product-details">
+                                <p class="title">RTX 3090</p>
+                                <p class="price">$1,500.00</p>
+                            </div>
+                            <button>Buy Now</button>
+                        </div>
+                        <div class="product-container amd-product out-of-stock">
+                            <img
+                                src="../assets/images/radeon-5700xt.webp"
+                                alt=""
+                            />
+                            <div class="product-details">
+                                <p class="title">RX 5700xt</p>
+                                <p class="price">Out of Stock</p>
+                            </div>
+                            <button disabled>Buy Now</button>
+                        </div>
+                        <div class="product-container amd-product">
+                            <img
+                                src="../assets/images/radeon-6700xt.jpeg"
+                                alt=""
+                            />
+                            <div class="product-details">
+                                <p class="title">RX 6700xt</p>
+                                <p class="price">$560.00</p>
+                            </div>
+                            <button>Buy Now</button>
+                        </div>
+                        <div
+                            class="
+                                product-container
+                                nvidia-product
+                                out-of-stock
+                            "
+                        >
+                            <img src="../assets/images/rtx-2080ti.jpg" alt="" />
+                            <div class="product-details">
+                                <p class="title">RTX 2080ti</p>
+                                <p class="price">Out of Stock</p>
+                            </div>
+                            <button>Buy Now</button>
+                        </div>
+                        <div
+                            class="
+                                product-container
+                                nvidia-product
+                                out-of-stock
+                            "
+                        >
+                            <img
+                                src="../assets/images/gtx-1080ti.jpeg"
+                                alt=""
+                            />
+                            <div class="product-details">
+                                <p class="title">GTX 1080ti</p>
+                                <p class="price">Out Of Stock</p>
+                            </div>
+                            <button>Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <video
+                autoplay
+                loop
+                muted
+                src="../assets/videos/footer.mp4"
+            ></video>
+            <div class="footer-content">
+                <div class="logo-container">
+                    <a href="/" style="text-decoration: none; color: white">
+                        <img
+                            class="logo"
+                            src="../assets/images/site-logo.svg"
+                            alt="Card Depot Logo"
+                        />
+                    </a>
+                </div>
+                <div class="follow-us">
+                    <h2>Follow Us</h2>
+                    <div class="socials-container">
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="mailing-list">
+                    <h4>Signup to Our Mailing List</h4>
+                    <div>
+                        <input
+                            type="text"
+                            name="email"
+                            placeholder="Email Address"
+                            id="mailing-list-email"
+                        />
+                        <input type="submit" value="Signup" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://kit.fontawesome.com/3c6fdc97de.js"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
