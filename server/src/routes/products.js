@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const Product = require("../models/product");
 
 // @desc Get all products
 // @route GET /products/
-app.get("/products", (req, res) => {
-    let products = ["GPU 1", "GPU 2", "GPU 3"];
+router.get("/products", async (req, res) => {
+    // get all products from mongoDB
+    const products = await Product.find();
     res.json(products);
 });
+
+module.exports = router;
