@@ -57,5 +57,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", require("./routes/auth"));
+app.use("/products", require("./routes/products"));
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
