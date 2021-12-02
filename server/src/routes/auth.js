@@ -4,7 +4,7 @@ const passport = require("passport");
 const router = express.Router();
 
 const { generateSalt, generateHash } = require("../utils/password");
-const User = require("../models/user");
+const User = require("../models/User");
 
 /**
  * @route POST /auth/login
@@ -36,6 +36,7 @@ router.post("/register", async (req, res) => {
         email: req.body.email,
         hash: hash,
         salt: salt,
+        role: req.body.role,
     });
     await user.save();
     req.login(user, (err) => {
