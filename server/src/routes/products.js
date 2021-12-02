@@ -50,4 +50,26 @@ router.get("/:brand", async (req, res) => {
     res.send(products);
 });
 
+/**
+ * @route POST /products
+ * @desc Create a product
+ * @access Private
+ */
+router.post("/", async (req, res) => {
+    const { name, description, image, stock, price, brand } = req.body;
+    const brandObj = await Brand.findOne({ name: brand });
+    if (!brandObj) return res.status(404).send("Brand not found");
+
+    const newProduct = new Product({
+        name,
+        description,
+        image,
+        stock,
+        price,
+        brand: brandObj._id,
+    });
+    await newProduct.save();
+    res.send(newProduct);
+});
+
 module.exports = router;
