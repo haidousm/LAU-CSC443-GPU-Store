@@ -21,7 +21,7 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(morgan("short"));
+app.use(morgan("dev"));
 
 app.use(
     cors({
@@ -55,5 +55,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("nothing to see here");
 });
+
+app.use("/auth", require("./routes/auth"));
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
