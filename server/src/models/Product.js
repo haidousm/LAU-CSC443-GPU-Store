@@ -29,5 +29,8 @@ const ProductSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-const Product = mongoose.model("Product", ProductSchema);
-module.exports = Product;
+ProductSchema.set("toJSON", {
+    virtuals: true,
+});
+
+module.exports = mongoose.model("Product", ProductSchema);

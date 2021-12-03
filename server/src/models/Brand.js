@@ -20,4 +20,8 @@ const BrandSchema = new mongoose.Schema({
     },
 });
 
+BrandSchema.set("toJSON", {
+    virtuals: true,
+});
+
 module.exports = mongoose.model("Brand", BrandSchema);

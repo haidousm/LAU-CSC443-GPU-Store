@@ -22,6 +22,9 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(morgan("dev"));
+app.use(express.static(__dirname + "/public"));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
 
 app.use(
     cors({

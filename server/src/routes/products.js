@@ -27,12 +27,24 @@ router.get("/", async (req, res) => {
 });
 
 /**
- * @route GET /products/:brand
+ * @route GET /products/:id
+ * @desc Render a product by id
+ * @param id - product id
+ * @access Public
+ */
+
+router.get("/:id", async (req, res) => {
+    const product = await Product.findById(req.params.id).populate("brand");
+    return res.render("pages/product");
+});
+
+/**
+ * @route GET /products/brand/:brand
  * @desc Get all products by brand
  * @param num - number of products to return (default: 10) | search - search term | sort - sort by price (asc/desc)
  * @access Public
  */
-router.get("/:brand", async (req, res) => {
+router.get("/brand/:brand", async (req, res) => {
     const { num, search, sort } = req.query;
     const limit = num ? parseInt(num) : 10;
     const searchTerm = search ? search : "";

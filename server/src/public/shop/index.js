@@ -1,4 +1,7 @@
-const PRODUCT_TEMPLATE = ` <div class="product-container {product-brand}-product">
+const API_ROOT = "http://localhost:3000";
+const PRODUCTS_API = `${API_ROOT}/products`;
+
+const PRODUCT_TEMPLATE = ` <div class="product-container {product-brand}-product" onclick="window.location.href='${PRODUCTS_API}/{product-id}'">
 <img
     src="{product-img}"
     alt=""
@@ -9,9 +12,6 @@ const PRODUCT_TEMPLATE = ` <div class="product-container {product-brand}-product
 </div>
 <button>Buy Now</button>
 </div>`;
-
-const API_ROOT = "http://localhost:3000";
-const PRODUCTS_API = `${API_ROOT}/products`;
 
 const productsContainer = document.querySelector(".products");
 
@@ -28,7 +28,7 @@ const fetchProductsByBrands = async () => {
         if (brandFilters[brand]) {
             products.push(
                 ...(await (
-                    await fetch(`${PRODUCTS_API}/${brand.toUpperCase()}`)
+                    await fetch(`${PRODUCTS_API}/brand/${brand.toUpperCase()}`)
                 ).json())
             );
         }
@@ -45,6 +45,7 @@ const renderProducts = (products) => {
             "{product-brand}",
             product.brand.name.toLowerCase()
         )
+            .replace("{product-id}", product.id)
             .replace("{product-img}", product.image)
             .replace("{product-title}", product.name)
             .replace("{product-price}", product.price);
