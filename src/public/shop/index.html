@@ -51,6 +51,7 @@
                                 type="checkbox"
                                 name="brand"
                                 id="amd"
+                                onchange="filterByBrand(event)"
                             />AMD</label
                         >
                         <label for="nvidia"
@@ -58,16 +59,17 @@
                                 type="checkbox"
                                 name="brand"
                                 id="nvidia"
+                                onchange="filterByBrand(event)"
                             />NVIDIA</label
                         >
                     </div>
-                    <div class="price-filter">
+                    <!-- <div class="price-filter">
                         <h4>Filter by Price</h4>
                         <label for="price"
                             >$0.00
                             <input type="range" id="price" /> $3,200.00</label
                         >
-                    </div>
+                    </div> -->
                     <div class="columns-count">
                         <h4>Number of Columns</h4>
                         <label for="cols-1"
@@ -91,80 +93,7 @@
                         checked
                     />
 
-                    <div class="products">
-                        <div class="product-container amd-product">
-                            <img
-                                src="../assets/images/radeon-6900xt.jpeg"
-                                alt=""
-                            />
-                            <div class="product-details">
-                                <p class="title">RX 6900xt</p>
-                                <p class="price">$1,300.00</p>
-                            </div>
-                            <button>Buy Now</button>
-                        </div>
-                        <div class="product-container nvidia-product">
-                            <img src="../assets/images/rtx-3090.png" alt="" />
-                            <div class="product-details">
-                                <p class="title">RTX 3090</p>
-                                <p class="price">$1,500.00</p>
-                            </div>
-                            <button>Buy Now</button>
-                        </div>
-                        <div class="product-container amd-product out-of-stock">
-                            <img
-                                src="../assets/images/radeon-5700xt.webp"
-                                alt=""
-                            />
-                            <div class="product-details">
-                                <p class="title">RX 5700xt</p>
-                                <p class="price">Out of Stock</p>
-                            </div>
-                            <button disabled>Buy Now</button>
-                        </div>
-                        <div class="product-container amd-product">
-                            <img
-                                src="../assets/images/radeon-6700xt.jpeg"
-                                alt=""
-                            />
-                            <div class="product-details">
-                                <p class="title">RX 6700xt</p>
-                                <p class="price">$560.00</p>
-                            </div>
-                            <button>Buy Now</button>
-                        </div>
-                        <div
-                            class="
-                                product-container
-                                nvidia-product
-                                out-of-stock
-                            "
-                        >
-                            <img src="../assets/images/rtx-2080ti.jpg" alt="" />
-                            <div class="product-details">
-                                <p class="title">RTX 2080ti</p>
-                                <p class="price">Out of Stock</p>
-                            </div>
-                            <button>Buy Now</button>
-                        </div>
-                        <div
-                            class="
-                                product-container
-                                nvidia-product
-                                out-of-stock
-                            "
-                        >
-                            <img
-                                src="../assets/images/gtx-1080ti.jpeg"
-                                alt=""
-                            />
-                            <div class="product-details">
-                                <p class="title">GTX 1080ti</p>
-                                <p class="price">Out Of Stock</p>
-                            </div>
-                            <button>Buy Now</button>
-                        </div>
-                    </div>
+                    <div class="products"></div>
                 </div>
             </div>
         </div>
@@ -211,5 +140,6 @@
             src="https://kit.fontawesome.com/3c6fdc97de.js"
             crossorigin="anonymous"
         ></script>
+        <script src="index.js"></script>
     </body>
 </html>

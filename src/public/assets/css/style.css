@@ -515,6 +515,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 10px;
+    cursor: pointer;
 }
 .product-container.amd-product {
     border: 3px solid #970a1b;
@@ -526,12 +527,6 @@ body {
 
 .product-container img {
     height: 150px;
-    transition: all 0.4s ease-in-out;
-}
-
-.product-container img:hover {
-    transform: scale(1.4);
-    transition: all 0.4s ease-in-out;
 }
 
 .product-details {
@@ -545,15 +540,16 @@ body {
 .product-details .title {
     font-size: 1.5rem;
 }
-.product-container.amd-product .price {
+.amd-product .price {
     color: #970a1b;
 }
 
-.product-container.nvidia-product .price {
+.nvidia-product .price {
     color: #76b900;
 }
 
-.product-container button {
+.amd-product button,
+.nvidia-product button {
     padding: 10px 25px;
     font-size: 1.25rem;
     border: none;
@@ -561,31 +557,34 @@ body {
     cursor: pointer;
 }
 
-.product-container button:hover {
+.amd-product button:hover,
+.nvidia-product button:hover {
     transform: translateY(-5px);
     transition: all 0.4s ease-in-out;
 }
-.product-container button:active {
+
+.amd-product button:active,
+.nvidia-product button:active {
     transform: translateY(0px);
     transition: all 0.4s ease-in-out;
 }
 
-.product-container.amd-product button {
+.amd-product button {
     background: #970a1b;
     color: #fff;
 }
 
-.product-container.nvidia-product button {
+.nvidia-product button {
     background: #76b900;
     color: #fff;
 }
 
-.product-container.out-of-stock button {
+.out-of-stock button {
     background-color: gray;
     cursor: not-allowed;
 }
 
-.product-container.out-of-stock button:hover {
+.out-of-stock button:hover {
     transform: none;
 }
 #cols-1:checked ~ .products {
@@ -647,6 +646,54 @@ body {
 .form-container input[type="submit"]:active {
     transform: translateY(0px);
     transition: all 0.4s ease-in-out;
+}
+
+/* Products Details Page */
+.product-details-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    box-shadow: 1px 2px 25px 0px rgba(0, 0, 0, 0.75);
+    width: 60%;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.product-details-image-container img {
+    width: 400px;
+    height: 300px;
+}
+
+.product-details-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 30px;
+}
+
+/* similar products grid*/
+
+.similar-products-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.similar-products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow: scroll;
+    row-gap: 30px;
+    margin: 15px 0px;
+    place-items: center;
+    width: 100%;
+}
+
+.similar-products-grid img {
+    width: 150px;
+    height: 150px;
 }
 
 /*Media Queries*/
@@ -851,6 +898,22 @@ body {
     .form-container {
         align-items: center;
         justify-content: center;
+    }
+
+    .product-details-container {
+        flex-direction: column;
+    }
+
+    .product-details-image-container img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .similar-products-grid {
+        grid-template-columns: 1fr;
+    }
+    .similar-product-container {
+        margin: 30px;
     }
 }
 

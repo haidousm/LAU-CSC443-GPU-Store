@@ -22,10 +22,13 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(morgan("dev"));
+app.use(express.static(__dirname + "/public"));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
 
 app.use(
     cors({
-        origin: "http://localhost:8100",
+        origin: "http://localhost:5500",
         credentials: true,
     })
 );
@@ -57,5 +60,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", require("./routes/auth"));
+app.use("/products", require("./routes/products"));
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
