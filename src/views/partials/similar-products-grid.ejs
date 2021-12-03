@@ -1,0 +1,21 @@
+<div class="similar-products-grid">
+    <% products.forEach(product => { %>
+    <div
+        class="
+            similar-product-container
+            <%-product.brand.name.toLowerCase()%>-product
+        "
+    >
+        <div class="similar-product-image">
+            <a href="/products/<%= product.id %>">
+                <img src="<%= product.image %>" alt="<%= product.name %>" />
+            </a>
+        </div>
+        <div class="similar-product-info">
+            <h1><%- product.name %></h1>
+            <p class="price">$<%= product.price %></p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+    </div>
+    <% }) %>
+</div>

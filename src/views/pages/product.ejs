@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+        <%- include('../partials/navbar'); %>
+        <div
+            class="
+                product-details-container
+                <%-product.brand.name.toLowerCase()%>-product
+            "
+        >
+            <div class="product-details-image-container">
+                <img src="<%- product.image %>" alt="<%- product.name %>" />
+            </div>
+            <div class="product-details-info-container">
+                <p>Brand: <strong><%- product.brand.name %></strong></p>
+                <h1><%- product.name %></h1>
+                <p><%- product.description %></p>
+                <p class="price">Price: $<%- product.price %></p>
+                <button>Buy Now</button>
+            </div>
+        </div>
+        <div class="similar-products-container">
+            <h2>Similar Products</h2>
+
+            <%- include('../partials/similar-products-grid', {products:
+            similarProducts}); %>
+        </div>
+        <%- include('../partials/footer'); %>
+    </body>
+</html>

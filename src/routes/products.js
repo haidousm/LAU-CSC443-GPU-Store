@@ -35,7 +35,15 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const product = await Product.findById(req.params.id).populate("brand");
-    return res.render("pages/product");
+    const similarProducts = (
+        await Product.find({
+            brand: product.brand._id,
+        })
+            .populate("brand")
+            .limit(3)
+    ).filter((p) => p.id !== product.id);
+
+    return res.render("pages/product", { product, similarProducts });
 });
 
 /**

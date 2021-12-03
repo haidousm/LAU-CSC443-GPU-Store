@@ -8,7 +8,7 @@ const PRODUCT_TEMPLATE = ` <div class="product-container {product-brand}-product
 />
 <div class="product-details">
     <p class="title">{product-title}</p>
-    <p class="price">{product-price}</p>
+    <p class="price">\${product-price}</p>
 </div>
 <button>Buy Now</button>
 </div>`;
