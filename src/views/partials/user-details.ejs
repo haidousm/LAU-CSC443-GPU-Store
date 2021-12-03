@@ -6,17 +6,26 @@
         <h2>Your addresses</h2>
         <% if (user.addresses.length != 0) { %>
         <div class="addresses-grid">
-            <% user.addresses.forEach(function(address) { %>
-                <% console.log(address) %> 
-            <div
-                class="address-container"
-               <%- address.isPrimary ? 'style="background: #4bb543"' : 'style="background: #000"' %>
-            >
-                <p><%- address.street %></p>
-                <p><%- address.city %></p>
-                <p><%- address.zip %></p>
-                <p><%- address.country %></p>
+            <% user.addresses.forEach(function(address) { %><div class="address-container" <%-
+            address.isPrimary ? 'style="background: #4bb543"' :
+            'style="background: #000"' %>>
+            <p><%- address.street %></p>
+            <p><%- address.city %></p>
+            <p><%- address.zip %></p>
+            <p><%- address.country %></p>
+            <!-- delete button and edit button with fontawesome icons -->
+            <div class="address-buttons">
+                <button
+                    class="delete-address-button"
+                    data-id="<%- address.id %>"
+                >
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="edit-address-button" data-id="<%- address.id %>">
+                    <i class="fas fa-edit"></i>
+                </button>
             </div>
+        </div>
             <% }); %> <% }else{ %>
 
             <div class="address-container">

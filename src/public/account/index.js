@@ -64,29 +64,6 @@ if (modalTriggers.length > 0) {
             popupModal.classList.add("is--visible");
             bodyBlackout.classList.add("is-blacked-out");
 
-            const countrySelector = document.getElementById("country");
-            const countries = await (
-                await fetch(
-                    "https://restcountries.com/v3.1/all?fields=name,cca2"
-                )
-            ).json();
-
-            countries.sort((a, b) => {
-                if (a.name.common < b.name.common) {
-                    return -1;
-                }
-                if (a.name.common > b.name.common) {
-                    return 1;
-                }
-                return 0;
-            });
-            countries.forEach((country) => {
-                const option = document.createElement("option");
-                option.value = country.cca2;
-                option.innerText = country.name.common;
-                countrySelector.appendChild(option);
-            });
-
             popupModal
                 .querySelector(".popup-modal__close")
                 .addEventListener("click", () => {
@@ -96,32 +73,109 @@ if (modalTriggers.length > 0) {
         });
         return;
     });
+
+    (async () => {
+        const countrySelector = document.getElementById("country");
+        const countries = await (
+            await fetch("https://restcountries.com/v3.1/all?fields=name,cca2")
+        ).json();
+
+        countries.sort((a, b) => {
+            if (a.name.common < b.name.common) {
+                return -1;
+            }
+            if (a.name.common > b.name.common) {
+                return 1;
+            }
+            return 0;
+        });
+        countries.forEach((country) => {
+            const option = document.createElement("option");
+            option.value = country.cca2;
+            option.innerText = country.name.common;
+            countrySelector.appendChild(option);
+        });
+    })();
 }
 
 let saveAddressButton = document.getElementById("add-address-submit");
+let streetField = document.getElementById("street");
+let cityField = document.getElementById("city");
+let zipField = document.getElementById("zip");
+let countrySelect = document.getElementById("country");
+let primaryAddressCheckbox = document.getElementById("primary");
+let addAddressButton = document.getElementById("add-address-button");
 if (saveAddressButton) {
-    let streetField = document.getElementById("street");
-    let cityField = document.getElementById("city");
-    let zipField = document.getElementById("zip");
-    let countrySelect = document.getElementById("country");
-    let primaryAddressCheckbox = document.getElementById("primary");
-
     saveAddressButton.addEventListener("click", async () => {
-        const response = await fetch(`${ACCOUNT_URL}/addresses`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                street: streetField.value,
-                city: cityField.value,
-                zip: zipField.value,
-                country: countrySelect.value,
-                isPrimary: primaryAddressCheckbox.checked,
-            }),
-        });
+        let response;
+        if (saveAddressButton.dataset.id) {
+            response = await fetch(`${ACCOUNT_URL}/addresses`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id: saveAddressButton.dataset.id,
+                    street: streetField.value,
+                    city: cityField.value,
+                    zip: zipField.value,
+                    country: countrySelect.value,
+                    isPrimary: primaryAddressCheckbox.checked,
+                }),
+            });
+        } else {
+            response = await fetch(`${ACCOUNT_URL}/addresses`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    street: streetField.value,
+                    city: cityField.value,
+                    zip: zipField.value,
+                    country: countrySelect.value,
+                    isPrimary: primaryAddressCheckbox.checked,
+                }),
+            });
+        }
         if (response.status === 200) {
             window.location.href = "/account";
         }
+    });
+}
+
+let deleteAddressButtons = document.querySelectorAll(".delete-address-button");
+let editAddressButtons = document.querySelectorAll(".edit-address-button");
+
+if (deleteAddressButtons) {
+    deleteAddressButtons.forEach((button) => {
+        button.addEventListener("click", async () => {
+            const response = await fetch(
+                `${ROOT_URL}/account/addresses/${button.dataset.id}`,
+                { method: "DELETE" }
+            );
+            if (response.status === 200) {
+                window.location.href = "/account";
+            }
+        });
+    });
+}
+
+if (editAddressButtons) {
+    editAddressButtons.forEach((button) => {
+        button.addEventListener("click", async () => {
+            const address = await (
+                await fetch(
+                    `${ROOT_URL}/account/addresses/${button.dataset.id}`
+                )
+            ).json();
+            streetField.value = address.street;
+            cityField.value = address.city;
+            zipField.value = address.zip;
+            countrySelect.value = address.country;
+            primaryAddressCheckbox.checked = address.isPrimary;
+            saveAddressButton.dataset.id = address.id;
+            addAddressButton.click();
+        });
     });
 }

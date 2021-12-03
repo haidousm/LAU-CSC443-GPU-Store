@@ -22,6 +22,18 @@ router.get("/", async (req, res) => {
  * @access Public
  */
 router.post("/addresses", async (req, res) => {
+    if (req.body.id) {
+        const address = await Address.findById(req.body.id);
+        address.street = req.body.street;
+        address.city = req.body.city;
+        address.zip = req.body.zip;
+        address.country = req.body.country;
+        address.isPrimary = req.body.isPrimary;
+        await address.save();
+        console.log(req.body.id);
+        return res.send(address);
+    }
+
     const address = new Address({
         user: req.user.id,
         street: req.body.street,
@@ -34,6 +46,31 @@ router.post("/addresses", async (req, res) => {
     await address.save();
 
     req.user.addresses.push(address);
+    await req.user.save();
+    res.send(address);
+});
+
+/**
+ * @route GET /account/addresses/:id
+ * @desc Get address by id
+ * @access Private
+ */
+
+router.get("/addresses/:id", async (req, res) => {
+    const address = await Address.findById(req.params.id);
+    res.send(address);
+});
+
+/**
+ * @route DELETE /account/addresses/:id
+ * @desc Delete address from user
+ * @access Private
+ */
+
+router.delete("/addresses/:id", async (req, res) => {
+    const address = await Address.findById(req.params.id);
+    await address.remove();
+    req.user.addresses.pull(address);
     await req.user.save();
     res.send(address);
 });
