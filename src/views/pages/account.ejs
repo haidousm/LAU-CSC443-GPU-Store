@@ -4,8 +4,10 @@
         <%- include('../partials/head'); %>
     </head>
     <body>
-        <%- include('../partials/navbar'); %> <% if (user) { %><% user %> <%
-        }else{%> <%- include('../partials/authenticate'); %> <%} %> <%-
+        <%- include('../partials/navbar'); %> <% if (user) { %><%-
+        include('../partials/user-details', {user: user});%> <% }else{%> <%-
+        include('../partials/authenticate'); %> <%} %> <%-
         include('../partials/footer');%>
+        <script src="/account/index.js"></script>
     </body>
 </html>
