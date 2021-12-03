@@ -602,17 +602,20 @@ body {
     height: 450px;
 }
 
-/*Contact Us Page*/
-.form-container {
+/*Authenticate Page*/
+
+.authenticate-container {
+    display: flex;
+}
+.register-container,
+.login-container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100%;
+    width: 50%;
+    padding: 30px;
 }
 
-.form-container input,
-.form-container textarea {
+.form-container input {
     margin: 15px;
     padding: 15px;
     width: 60%;
@@ -629,8 +632,7 @@ body {
 }
 
 .form-container input[type="submit"] {
-    align-self: center;
-    justify-self: center;
+    margin-left: 30px;
     border: none;
     background-color: #000;
     color: #fff;

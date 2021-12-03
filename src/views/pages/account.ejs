@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+        <%- include('../partials/navbar'); %> <% if (user) { %><% user %> <%
+        }else{%> <%- include('../partials/authenticate'); %> <%} %> <%-
+        include('../partials/footer');%>
+    </body>
+</html>
