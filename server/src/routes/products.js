@@ -21,7 +21,8 @@ router.get("/", async (req, res) => {
 
     const products = await Product.find(query)
         .limit(limit)
-        .sort({ price: sortBy });
+        .sort({ price: sortBy })
+        .populate("brand");
     res.send(products);
 });
 
@@ -46,7 +47,8 @@ router.get("/:brand", async (req, res) => {
 
     const products = await Product.find({ brand: brandObj._id, ...query })
         .limit(limit)
-        .sort({ price: sortBy });
+        .sort({ price: sortBy })
+        .populate("brand");
     res.send(products);
 });
 
