@@ -27,6 +27,48 @@ router.get("/", async (req, res) => {
 });
 
 /**
+ * @route POST /products
+ * @desc Create a product
+ * @access Private
+ */
+router.post("/", async (req, res) => {
+    const product = new Product({
+        name: req.body.name,
+        price: req.body.price,
+        brand: req.body.brand,
+        image: req.body.image,
+        description: req.body.description,
+        stock: req.body.stock,
+    });
+
+    await product.save();
+    res.send(product);
+});
+
+/**
+ * @route GET /products/delete/:id
+ * @desc Delete a product
+ * @access Private
+ */
+
+router.get("/delete/:id", async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).send("Product not found");
+    await product.remove();
+    res.redirect("/admin");
+});
+
+/**
+ * @route GET /products/brands
+ * @desc Get all brands
+ * @access Public
+ */
+router.get("/brands", async (req, res) => {
+    const brands = await Brand.find();
+    res.send(brands);
+});
+
+/**
  * @route GET /products/:id
  * @desc Render a product by id
  * @param id - product id
