@@ -66,4 +66,8 @@ app.use("/cart", require("./routes/cart"));
 app.use("/orders", require("./routes/orders"));
 app.use("/admin", require("./routes/admin"));
 
+app.get("*", function (req, res) {
+    res.status(404).send("it ain't here chief. FOUR O FOUR");
+});
+
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
