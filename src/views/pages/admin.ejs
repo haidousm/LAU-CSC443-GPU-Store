@@ -82,6 +82,7 @@
                             <th>Status</th>
                             <th>Date</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,7 +94,18 @@
                                 order.user.lastName %>
                             </td>
                             <td><%= order.total %></td>
-                            <td><%= order.status %></td>
+                            <td>
+                                <select id="status-<%= order.id %>" required>
+                                    <option value="pending">Pending</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                                <script>
+                                    document.getElementById(
+                                        "status-<%=order.id%>"
+                                    ).value = "<%= order.status %>";
+                                </script>
+                            </td>
                             <td><%= order.date.toLocaleString("en-uk") %></td>
                             <td>
                                 <a
@@ -107,6 +119,20 @@
                                     "
                                     >View</a
                                 >
+                            </td>
+                            <td>
+                                <button
+                                    class="cta-btn update-order-status"
+                                    style="
+                                        color: #000;
+                                        font-size: 0.75rem;
+                                        border: none;
+                                        background: orange;
+                                    "
+                                    data-id="<%= order.id %>"
+                                >
+                                    Update Status
+                                </button>
                             </td>
                         </tr>
                         <% }); %>
@@ -269,6 +295,31 @@
                             document.getElementById("brand").value = brand;
                             addProductSubmit.dataset.id = productId;
                             addProductTriggers[0].click();
+                        }
+                    });
+                });
+
+                const updateStatusButtons = document.querySelectorAll(
+                    ".update-order-status"
+                );
+                updateStatusButtons.forEach((button) => {
+                    button.addEventListener("click", async () => {
+                        const orderId = button.dataset.id;
+                        const status = document.getElementById(
+                            `status-${orderId}`
+                        ).value;
+                        const response = await fetch(`/orders/${orderId}`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                status,
+                            }),
+                        });
+                        const data = await response.json();
+                        if (response.status === 200) {
+                            window.location.reload();
                         }
                     });
                 });

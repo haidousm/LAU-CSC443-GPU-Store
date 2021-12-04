@@ -74,7 +74,7 @@
             </div>
         
         </div>
-        <input type="hidden" id="addressId" name="addressId" value="<%- user.addresses.find((address) => address.isPrimary).id %>">
+        <input type="hidden" id="addressId" name="addressId" value="<%- user.addresses.length !== 0 ? user.addresses.find((address) => address.isPrimary).id : '' %>">
             <div class="checkout-button-container">
                 <button class="checkout-button cta-btn">
                     <i class="fa fa-check-square-o" aria-hidden="true"></i>
