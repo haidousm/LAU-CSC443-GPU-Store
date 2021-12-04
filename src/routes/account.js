@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require("../models/User");
 const Address = require("../models/Address");
+const Order = require("../models/Order");
 
 /**
  * @route GET /account
@@ -11,12 +12,17 @@ const Address = require("../models/Address");
  */
 router.get("/", async (req, res) => {
     let user;
+    let orderHistory = [];
     if (req.user) {
         user = await User.findById(req.user._id).populate("addresses");
+        orderHistory = await Order.find({ user: req.user._id }).populate(
+            "products.product"
+        );
     }
+
     res.render("pages/account", {
         user: user,
-        orderHistory: [],
+        orderHistory: orderHistory,
     });
 });
 
