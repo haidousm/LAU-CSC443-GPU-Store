@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+        <%- include('../partials/navbar'); %>
+
+        <div class="admin-dashboard">
+            <div class="admin-container">
+                <div class="products-admin-header" style="display: flex">
+                    <h1>Products</h1>
+                    <button
+                        class="cta-btn add-product-trigger"
+                        style="
+                            color: #fff;
+
+                            background: green;
+                            border: none;
+                        "
+                        data-popup-trigger="add-product"
+                    >
+                        Add Product
+                    </button>
+                </div>
+                <table class="admin-table cart-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Desc.</th>
+                            <th>Stock</th>
+                            <th>Brand</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% products.forEach(function(product) { %>
+                        <tr>
+                            <td><%= product.name %></td>
+                            <td><%= product.price %></td>
+                            <td><%= product.description %></td>
+                            <td><%= product.stock %></td>
+                            <td><%= product.brand.name %></td>
+                            <td>
+                                <button
+                                    class="cta-btn edit-product"
+                                    style="
+                                        color: #000;
+                                        font-size: 0.75rem;
+                                        border: none;
+                                        background: orange;
+                                    "
+                                    data-popup-trigger="add-product"
+                                    data-id="<%= product.id %>"
+                                >
+                                    Edit
+                                </button>
+                            </td>
+                            <td>
+                                <a
+                                    href="/products/delete/<%= product.id %>"
+                                    class="cta-btn"
+                                    style="color: #000; font-size: 0.75rem"
+                                    >Delete</a
+                                >
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="admin-container">
+                <h1>Orders</h1>
+                <table class="admin-table cart-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% orders.forEach(function(order) { %>
+                        <tr>
+                            <td><%= order.id %></td>
+                            <td>
+                                <%= order.user.firstName + " " +
+                                order.user.lastName %>
+                            </td>
+                            <td><%= order.total %></td>
+                            <td>
+                                <select id="status-<%= order.id %>" required>
+                                    <option value="pending">Pending</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                                <script>
+                                    document.getElementById(
+                                        "status-<%=order.id%>"
+                                    ).value = "<%= order.status %>";
+                                </script>
+                            </td>
+                            <td><%= order.date.toLocaleString("en-uk") %></td>
+                            <td>
+                                <a
+                                    href="/account/order-details/<%= order.id %>"
+                                    class="cta-btn"
+                                    style="
+                                        color: #fff;
+                                        font-size: 0.75rem;
+                                        background: green;
+                                        border: none;
+                                    "
+                                    >View</a
+                                >
+                            </td>
+                            <td>
+                                <button
+                                    class="cta-btn update-order-status"
+                                    style="
+                                        color: #000;
+                                        font-size: 0.75rem;
+                                        border: none;
+                                        background: orange;
+                                    "
+                                    data-id="<%= order.id %>"
+                                >
+                                    Update Status
+                                </button>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <%- include('../partials/footer');%>
+        <div class="body-blackout"></div>
+        <div class="popup-modal shadow" data-popup-modal="add-product">
+            <i class="fas fa-2x fa-times popup-modal__close"></i>
+            <div class="add-address-form add-product-form">
+                <input type="text" placeholder="Name" id="name" required />
+                <textarea
+                    type="text"
+                    placeholder="Description"
+                    id="description"
+                    required
+                ></textarea>
+                <input
+                    type="number"
+                    name="price"
+                    id="price"
+                    placeholder="Price"
+                />
+                <input
+                    type="number"
+                    name="stock"
+                    id="stock"
+                    placeholder="Stock"
+                />
+                <input
+                    type="text"
+                    name="image-url"
+                    id="image-url"
+                    placeholder="Image Url"
+                />
+                <select id="brand" required>
+                    <option value="">Select Brand</option>
+                </select>
+
+                <label for="primary">
+                    <button id="add-product-submit" class="cta-btn">
+                        Save
+                    </button>
+                </label>
+            </div>
+        </div>
+        <script>
+            window.onload = async () => {
+                const brandSelector = document.getElementById("brand");
+                const brands = await (await fetch("/products/brands")).json();
+                brands.forEach((brand) => {
+                    const option = document.createElement("option");
+                    option.value = brand.id;
+                    option.innerText = brand.name;
+                    brandSelector.appendChild(option);
+                });
+
+                const bodyBlackout = document.querySelector(".body-blackout");
+
+                const addProductTriggers = document.querySelectorAll(
+                    ".add-product-trigger"
+                );
+                addProductTriggers.forEach((trigger) => {
+                    trigger.addEventListener("click", async () => {
+                        const { popupTrigger } = trigger.dataset;
+                        const popupModal = document.querySelector(
+                            `[data-popup-modal="${popupTrigger}"]`
+                        );
+                        popupModal.classList.add("is--visible");
+                        bodyBlackout.classList.add("is-blacked-out");
+
+                        popupModal
+                            .querySelector(".popup-modal__close")
+                            .addEventListener("click", () => {
+                                popupModal.classList.remove("is--visible");
+                                bodyBlackout.classList.remove("is-blacked-out");
+                            });
+                    });
+                });
+
+                const addProductSubmit =
+                    document.getElementById("add-product-submit");
+                addProductSubmit.addEventListener("click", async () => {
+                    const name = document.getElementById("name").value;
+                    const description =
+                        document.getElementById("description").value;
+                    const price = document.getElementById("price").value;
+                    const stock = document.getElementById("stock").value;
+                    const imageUrl = document.getElementById("image-url").value;
+                    const brand = document.getElementById("brand").value;
+
+                    let response;
+                    if (addProductSubmit.dataset.id) {
+                        response = await fetch(
+                            `/products/${addProductSubmit.dataset.id}`,
+                            {
+                                method: "PUT",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    name,
+                                    description,
+                                    price,
+                                    stock,
+                                    image: imageUrl,
+                                    brand,
+                                }),
+                            }
+                        );
+                    } else {
+                        let response = await fetch("/products", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                name,
+                                description,
+                                price,
+                                stock,
+                                image: imageUrl,
+                                brand,
+                            }),
+                        });
+                    }
+
+                    const data = await response.json();
+                    if (response.status === 200) {
+                        window.location.reload();
+                    }
+                });
+
+                const editProductTriggers =
+                    document.querySelectorAll(".edit-product");
+                editProductTriggers.forEach((trigger) => {
+                    trigger.addEventListener("click", async () => {
+                        const productId = trigger.getAttribute("data-id");
+                        const response = await fetch(
+                            `/products/${productId}/edit`
+                        );
+                        const data = await response.json();
+                        if (response.status === 200) {
+                            const {
+                                name,
+                                description,
+                                price,
+                                stock,
+                                image,
+                                brand,
+                            } = data;
+                            document.getElementById("name").value = name;
+                            document.getElementById("description").value =
+                                description;
+                            document.getElementById("price").value = price;
+                            document.getElementById("stock").value = stock;
+                            document.getElementById("image-url").value = image;
+                            document.getElementById("brand").value = brand;
+                            addProductSubmit.dataset.id = productId;
+                            addProductTriggers[0].click();
+                        }
+                    });
+                });
+
+                const updateStatusButtons = document.querySelectorAll(
+                    ".update-order-status"
+                );
+                updateStatusButtons.forEach((button) => {
+                    button.addEventListener("click", async () => {
+                        const orderId = button.dataset.id;
+                        const status = document.getElementById(
+                            `status-${orderId}`
+                        ).value;
+                        const response = await fetch(`/orders/${orderId}`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                                status,
+                            }),
+                        });
+                        const data = await response.json();
+                        if (response.status === 200) {
+                            window.location.reload();
+                        }
+                    });
+                });
+            };
+        </script>
+    </body>
+</html>

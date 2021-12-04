@@ -109,4 +109,15 @@ router.get("/order-details/:id", async (req, res) => {
     res.render("pages/order-details", { order: order });
 });
 
+/**
+ * @route GET /account/logout
+ * @desc Logout user
+ * @access Private
+ */
+
+router.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
+});
+
 module.exports = router;

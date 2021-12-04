@@ -11,6 +11,7 @@ const Product = require("../models/Product");
  * @access Private
  */
 router.get("/", async (req, res) => {
+    if (!req.user) return res.redirect("/account");
     let cart = await Cart.findOne({ user: req.user._id })
         .populate("user")
         .populate({

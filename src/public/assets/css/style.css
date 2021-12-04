@@ -890,7 +890,7 @@ body {
 }
 
 .popup-modal {
-    height: 365px;
+    height: 450px;
     width: 30%;
     background-color: #fff;
     position: absolute;
@@ -925,7 +925,8 @@ body {
 }
 
 .add-address-form input,
-.add-address-form select {
+.add-address-form select,
+.add-address-form textarea {
     margin: 15px;
     padding: 5px;
     border: 1px solid black;
@@ -937,7 +938,8 @@ body {
     padding: 5px;
 }
 
-#add-address-submit {
+#add-address-submit,
+#add-product-submit {
     background: #4bb543;
     margin: 0px 10px;
     color: #fff;
@@ -945,6 +947,80 @@ body {
     border: none;
     width: 30%;
     padding: 10px;
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.admin-table {
+    border-collapse: collapse;
+    width: 80%;
+}
+.admin-table tbody {
+    display: block;
+    height: 500px;
+    overflow: auto;
+}
+
+.admin-table tbody tr,
+.admin-table thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.admin-table td {
+    word-wrap: break-word;
+}
+
+/* Stock Tickers */
+.stock-tickers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nvidia-stock,
+.amd-stock {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-shadow: 1px 2px 25px 0px rgba(0, 0, 0, 0.75);
+}
+
+.stock-price {
+    font-size: 1.15rem;
+}
+
+.nvidia-stock h3,
+.amd-stock h3 {
+    margin: 5px;
+}
+
+.nvidia-stock {
+    background-color: #75b900;
+    color: #fff;
+    border: none;
+}
+
+.amd-stock {
+    background-color: #970a1b;
+    color: #fff;
+    border: none;
 }
 
 /*Media Queries*/

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");
+const Product = require("../models/Product");
 
 /**
  * @route GET /order
@@ -26,6 +27,19 @@ router.post("/", async (req, res) => {
     if (!cart) {
         return res.status(400).send("Cart is empty");
     }
+
+    cart.products.forEach(async (productCartObj) => {
+        const product = await Product.findById(productCartObj.product);
+        if (!product) {
+            return res.status(400).send("Product not found");
+        }
+        if (product.stock < productCartObj.quantity) {
+            return res.status(400).send("Product out of stock");
+        }
+        product.stock -= productCartObj.quantity;
+        await product.save();
+    });
+
     const order = new Order({
         products: cart.products,
         total: cart.total,

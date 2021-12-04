@@ -64,5 +64,6 @@ app.use("/products", require("./routes/products"));
 app.use("/account", require("./routes/account"));
 app.use("/cart", require("./routes/cart"));
 app.use("/orders", require("./routes/orders"));
+app.use("/admin", require("./routes/admin"));
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
