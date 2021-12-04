@@ -13,7 +13,6 @@
             <p><%- address.city %></p>
             <p><%- address.zip %></p>
             <p><%- address.country %></p>
-            <!-- delete button and edit button with fontawesome icons -->
             <div class="address-buttons">
                 <button
                     class="delete-address-button"
@@ -55,6 +54,7 @@
                     <th>Order ID</th>
                     <th>Date</th>
                     <th>Total</th>
+                    <th>Status</th>
                     <th></th>
                 </tr>
             </thead>
@@ -65,6 +65,7 @@
                             <td><%- order.id %></td>
                             <td><%- order.date %></td>
                             <td><%- order.total %></td>
+                            <td><%- order.status %></td>
                             <td><a href="order-details/<%- order.id %>">Details</a></td>
                         </tr>
                         <% }); %>
