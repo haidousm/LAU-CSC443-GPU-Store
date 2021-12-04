@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+        <%- include('../partials/navbar'); %> <% if (!user) {
+        window.location.href = '/account'; } %>
+
+        <div class="cart-container">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (var i = 0; i < cart.products.length; i++) { var
+                    product = cart.products[i].product; %>
+
+                    <tr
+                        class="<%= product.brand.name.toLowerCase()%>-cart-item"
+                    >
+                        <td><%= product.name %></td>
+                        <td>$<%= product.price %></td>
+                        <td><%= cart.products[i].quantity %></td>
+                        <td>
+                            $<%= product.price * cart.products[i].quantity %>
+                        </td>
+                        <td>
+                            <button
+                                class="remove-from-cart-button"
+                                data-id="<%- product.id %>"
+                            >
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <table class="order-total-table">
+                <tr>
+                    <td>Subtotal</td>
+                    <td>$<%= cart.total.toFixed(2) %></td>
+                </tr>
+            </table>
+            <div class="checkout-button-container">
+                <button class="checkout-button cta-btn">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    Checkout
+                </button>
+            </div>
+        </div>
+        <%- include('../partials/footer');%>
+        <script>
+            window.onload = () => {
+                const deleteFromCartButtons = document.querySelectorAll(
+                    ".remove-from-cart-button"
+                );
+
+                deleteFromCartButtons.forEach((button) => {
+                    button.addEventListener("click", async () => {
+                        const productId = button.getAttribute("data-id");
+                        const url = `/cart/${productId}`;
+                        const response = await fetch(url, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        });
+                        const data = await response.json();
+                        if (data.success) {
+                            window.location.href = "/cart";
+                        } else {
+                            alert("Something went wrong!");
+                        }
+                    });
+                });
+
+                const checkoutButton =
+                    document.querySelector(".checkout-button");
+                checkoutButton.addEventListener("click", async () => {
+                    const url = "/orders";
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        window.location.href = "/account";
+                    } else {
+                        alert("Something went wrong!");
+                    }
+                });
+            };
+        </script>
+    </body>
+</html>
