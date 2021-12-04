@@ -765,6 +765,12 @@ body {
     cursor: pointer;
 }
 
+/* Order History */
+
+.order-history-table {
+    font-size: 1.5rem;
+}
+
 /* Modal Styles */
 
 .body-blackout {

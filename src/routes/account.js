@@ -10,16 +10,20 @@ const Address = require("../models/Address");
  * @access Public
  */
 router.get("/", async (req, res) => {
-    const user = await User.findById(req.user._id).populate("addresses");
+    let user;
+    if (req.user) {
+        user = await User.findById(req.user._id).populate("addresses");
+    }
     res.render("pages/account", {
         user: user,
+        orderHistory: [],
     });
 });
 
 /**
  * @route POST /account/addresses
  * @desc Add address to user
- * @access Public
+ * @access Private
  */
 router.post("/addresses", async (req, res) => {
     if (req.body.id) {
