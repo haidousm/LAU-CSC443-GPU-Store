@@ -29,6 +29,7 @@ router.post("/", async (req, res) => {
     const order = new Order({
         products: cart.products,
         total: cart.total,
+        address: req.body.addressId,
         user: req.user._id,
     });
     await order.save();

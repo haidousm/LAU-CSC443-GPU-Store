@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Cart = require("../models/Cart");
+const User = require("../models/User");
 const Product = require("../models/Product");
 
 /**
@@ -17,14 +18,15 @@ router.get("/", async (req, res) => {
             model: "Product",
             populate: { path: "brand", model: "Brand" },
         });
+    const user = await User.findById(req.user._id).populate("addresses");
     if (!cart) {
         cart = new Cart({
-            user: req.user._id,
+            user: user,
             products: [],
             total: 0,
         });
     }
-    res.render("pages/cart", { user: req.user, cart });
+    res.render("pages/cart", { user: user, cart });
 });
 
 /**

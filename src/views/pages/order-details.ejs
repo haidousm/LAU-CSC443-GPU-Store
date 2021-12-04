@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+        <%- include('../partials/navbar'); %>
+        <div class="cart-container">
+            <h1><%- order.date.toLocaleDateString("en-UK") %></h1>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (var i = 0; i < order.products.length; i++) { var
+                    product = order.products[i].product; %>
+
+                    <tr
+                        class="<%= product.brand.name.toLowerCase()%>-cart-item"
+                    >
+                        <td><%= product.name %></td>
+                        <td>$<%= product.price %></td>
+                        <td><%= order.products[i].quantity %></td>
+                        <td>
+                            $<%= product.price * order.products[i].quantity %>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            <table class="order-total-table">
+                <tr>
+                    <td>Subtotal</td>
+                    <td>$<%= order.total.toFixed(2) %></td>
+                </tr>
+            </table>
+        </div>
+        <%- include('../partials/footer');%>
+        <script src="/account/index.js"></script>
+    </body>
+</html>
