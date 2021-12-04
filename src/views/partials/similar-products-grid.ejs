@@ -14,7 +14,9 @@
         <div class="similar-product-info">
             <h1><%- product.name %></h1>
             <p class="price">$<%= product.price %></p>
-            <button class="add-to-cart">Add to cart</button>
+            <button class="add-to-cart-button" data-id="<%- product.id %> ">
+                Add to cart
+            </button>
         </div>
     </div>
     <% }) %>

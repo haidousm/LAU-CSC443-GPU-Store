@@ -19,7 +19,9 @@
                 <h1><%- product.name %></h1>
                 <p><%- product.description %></p>
                 <p class="price">Price: $<%- product.price %></p>
-                <button>Buy Now</button>
+                <button class="add-to-cart-button" data-id="<%- product.id %>">
+                    Buy Now
+                </button>
             </div>
         </div>
         <div class="similar-products-container">
@@ -30,4 +32,30 @@
         </div>
         <%- include('../partials/footer'); %>
     </body>
+    <script>
+        window.onload = () => {
+            const addToCartButtons = document.querySelectorAll(
+                ".add-to-cart-button"
+            );
+
+            addToCartButtons.forEach((button) => {
+                button.addEventListener("click", async () => {
+                    const productId = button.getAttribute("data-id");
+                    const url = `/cart/${productId}`;
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        alert("Product added to cart!");
+                    } else {
+                        alert("Something went wrong!");
+                    }
+                });
+            });
+        };
+    </script>
 </html>

@@ -63,8 +63,8 @@
                     <% orderHistory.forEach(function(order) { %>
                         <tr>
                             <td><%- order.id %></td>
-                            <td><%- order.date %></td>
-                            <td><%- order.total %></td>
+                            <td><%- order.date.toLocaleDateString("en-UK") %></td>
+                            <td>$<%- order.total.toFixed(2) %></td>
                             <td><%- order.status %></td>
                             <td><a href="order-details/<%- order.id %>">Details</a></td>
                         </tr>

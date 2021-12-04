@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/head'); %>
+    </head>
+    <body>
+        <%- include('../partials/navbar'); %> <% if (!user) {
+        window.location.href = '/account'; } %>
+
+        <div class="cart-container">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (var i = 0; i < cart.products.length; i++) { var
+                    product = cart.products[i].product; %>
+
+                    <tr
+                        class="<%= product.brand.name.toLowerCase()%>-cart-item"
+                    >
+                        <td><%= product.name %></td>
+                        <td>$<%= product.price %></td>
+                        <td><%= cart.products[i].quantity %></td>
+                        <td>
+                            $<%= product.price * cart.products[i].quantity %>
+                        </td>
+                        <td>
+                            <button
+                                class="remove-from-cart-button"
+                                data-id="<%- product.id %>"
+                            >
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <% } %></tbody>
+            </table>
+            <table class="order-total-table">
+                <tr>
+                    <td>Subtotal</td>
+                    <td>$<%= cart.total.toFixed(2) %></td>
+                </tr>
+            </table>
+            <div class="addresses-container">
+        <h2>Select an address</h2>
+        <% if (user.addresses.length != 0) { %>
+            <div class="addresses-grid">
+                <% user.addresses.forEach(function(address) { %>
+                    <div class="address-container" <%-
+                address.isPrimary ? 'style="background: #4bb543; cursor: pointer; box-shadow: none;"' :
+                'style="background: #000; cursor: pointer; box-shadow: none;"' %> data-id="<%- address.id %>">
+                <p><%- address.street %></p>
+                <p><%- address.city %></p>
+                <p><%- address.zip %></p>
+                <p><%- address.country %></p>
+                
+            </div>
+                <% }); %> <% }else{ %>
+
+                <div class="address-container">
+                    <p>
+                        None yet, but head onto your <a href="/account"> account </a> to add one!
+                    </p>
+                </div>
+
+                <%} %>
+            </div>
+        
+        </div>
+        <input type="hidden" id="addressId" name="addressId" value="<%- user.addresses.find((address) => address.isPrimary).id %>">
+            <div class="checkout-button-container">
+                <button class="checkout-button cta-btn">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    Checkout
+                </button>
+            </div>
+        </div>
+        <%- include('../partials/footer');%>
+        <script>
+            window.onload = () => {
+
+                if(document.querySelector('tbody').innerHTML.indexOf('tr') == -1){
+                    window.location.href = '/shop';
+                }
+
+                const deleteFromCartButtons = document.querySelectorAll(
+                    ".remove-from-cart-button"
+                );
+
+                deleteFromCartButtons.forEach((button) => {
+                    button.addEventListener("click", async () => {
+                        const productId = button.getAttribute("data-id");
+                        const url = `/cart/${productId}`;
+                        const response = await fetch(url, {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        });
+                        const data = await response.json();
+                        if (data.success) {
+                            window.location.href = "/cart";
+                        } else {
+                            alert("Something went wrong!");
+                        }
+                    });
+                });
+
+                const checkoutButton =
+                    document.querySelector(".checkout-button");
+                checkoutButton.addEventListener("click", async () => {
+                    const url = "/orders";
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            addressId: document.getElementById("addressId").value,
+                        }),
+                    });
+                    const data = await response.json();
+                    if (response.status === 200) {
+                        window.location.href = "/account";
+                    } else {
+                        alert("Something went wrong!");
+                    }
+                });
+
+                const addresses = document.querySelectorAll(".address-container");
+                addresses.forEach((address) => {
+                    address.addEventListener("click", async () => {
+
+                        const addressId = address.getAttribute("data-id");
+                        address.style.background = "#4bb543";
+                        addresses.forEach((otherAddress) => {
+                            if (otherAddress.getAttribute("data-id") !== addressId) {
+                                otherAddress.style.background = "#000";
+                            }
+                        });
+                        const addressIdInput = document.getElementById("addressId");
+                        addressIdInput.value = addressId;
+                    });
+                });
+            };
+        </script>
+    </body>
+</html>

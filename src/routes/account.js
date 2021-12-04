@@ -85,4 +85,28 @@ router.delete("/addresses/:id", async (req, res) => {
     res.send(address);
 });
 
+/**
+ * @route GET /account/order-details/:id
+ * @desc Get order details by id
+ * @access Private
+ */
+
+router.get("/order-details/:id", async (req, res) => {
+    if (!req.user) {
+        return res.redirect("/account");
+    }
+    const order = await Order.findById(req.params.id).populate([
+        {
+            path: "products.product",
+            model: "Product",
+            populate: { path: "brand", model: "Brand" },
+        },
+        {
+            path: "address",
+            model: "Address",
+        },
+    ]);
+    res.render("pages/order-details", { order: order });
+});
+
 module.exports = router;
