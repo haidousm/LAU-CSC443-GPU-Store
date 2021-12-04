@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
         email: req.body.email,
         hash: hash,
         salt: salt,
-        role: req.body.role,
+        role: "customer",
     });
     await user.save();
     req.login(user, (err) => {

@@ -1,0 +1,106 @@
+<div class="user-details-container">
+    <h1>Hey, <%- user.firstName + " " + user.lastName %></h1>
+    <p>Your email is: <%- user.email %></p>
+
+    <div class="addresses-container">
+        <h2>Your addresses</h2>
+        <% if (user.addresses.length != 0) { %>
+        <div class="addresses-grid">
+            <% user.addresses.forEach(function(address) { %><div class="address-container" <%-
+            address.isPrimary ? 'style="background: #4bb543"' :
+            'style="background: #000"' %>>
+            <p><%- address.street %></p>
+            <p><%- address.city %></p>
+            <p><%- address.zip %></p>
+            <p><%- address.country %></p>
+            <div class="address-buttons">
+                <button
+                    class="delete-address-button"
+                    data-id="<%- address.id %>"
+                >
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="edit-address-button" data-id="<%- address.id %>">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </div>
+        </div>
+            <% }); %> <% }else{ %>
+
+            <div class="address-container">
+                <p>
+                    None yet, but feel free to add your address using the button
+                    below
+                </p>
+            </div>
+
+            <%} %>
+        </div>
+
+        <button
+            id="add-address-button"
+            class="popup-trigger"
+            data-popup-trigger="add-address"
+        >
+            <i class="fas fa-plus-circle" style="margin: 5px"></i>Address
+        </button>
+    </div>
+
+    <div class="order-history-container">
+        <h2>Your order history</h2>
+        <table class="order-history-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (orderHistory.length != 0) { %>
+                    <% orderHistory.forEach(function(order) { %>
+                        <tr>
+                            <td><%- order.id %></td>
+                            <td><%- order.date %></td>
+                            <td><%- order.total %></td>
+                            <td><%- order.status %></td>
+                            <td><a href="order-details/<%- order.id %>">Details</a></td>
+                        </tr>
+                        <% }); %>
+                <%} else { %>
+                    <tr>
+                        <td colspan="4">
+                            Head to the <a href="/shop" style="
+                            text-decoration: none; 
+                            background: linear-gradient(to right, #30cfd0 0%, #330867 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            text-transform: uppercase;
+                            font-size: 1.5rem;">shop</a> to get started!
+                        </td>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>       
+    </div>
+</div>
+
+<div class="body-blackout"></div>
+<div class="popup-modal shadow" data-popup-modal="add-address">
+    <i class="fas fa-2x fa-times popup-modal__close"></i>
+    <div class="add-address-form">
+        <input type="text" placeholder="Street" id="street" required />
+        <input type="text" placeholder="City" id="city" required />
+        <input type="number" name="zip" id="zip" placeholder="Zip Code" />
+        <select id="country" required>
+            <option value="">Select a country</option>
+        </select>
+        <label for="primary">
+            Primary Address?
+            <input type="checkbox" id="primary" />
+            <button id="add-address-submit" class="cta-btn">Save</button>
+        </label>
+    </div>
+</div>
