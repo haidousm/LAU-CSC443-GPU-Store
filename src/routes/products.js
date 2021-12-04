@@ -89,6 +89,36 @@ router.get("/:id", async (req, res) => {
 });
 
 /**
+ * @route GET /products/:id/edit
+ * @desc Return a product for editing
+ * @param id - product id
+ * @access Private
+ */
+router.get("/:id/edit", async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    res.send(product);
+});
+
+/**
+ * @route PUT /products/:id
+ * @desc Update a product
+ * @param id - product id
+ * @access Private
+ */
+router.put("/:id", async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).send("Product not found");
+    product.name = req.body.name;
+    product.price = req.body.price;
+    product.brand = req.body.brand;
+    product.image = req.body.image;
+    product.description = req.body.description;
+    product.stock = req.body.stock;
+    await product.save();
+    res.send(product);
+});
+
+/**
  * @route GET /products/brand/:brand
  * @desc Get all products by brand
  * @param num - number of products to return (default: 10) | search - search term | sort - sort by price (asc/desc)
