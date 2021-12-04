@@ -985,6 +985,44 @@ body {
     word-wrap: break-word;
 }
 
+/* Stock Tickers */
+.stock-tickers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nvidia-stock,
+.amd-stock {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-shadow: 1px 2px 25px 0px rgba(0, 0, 0, 0.75);
+}
+
+.stock-price {
+    font-size: 1.15rem;
+}
+
+.nvidia-stock h3,
+.amd-stock h3 {
+    margin: 5px;
+}
+
+.nvidia-stock {
+    background-color: #75b900;
+    color: #fff;
+    border: none;
+}
+
+.amd-stock {
+    background-color: #970a1b;
+    color: #fff;
+    border: none;
+}
+
 /*Media Queries*/
 
 @media (max-width: 600px) {

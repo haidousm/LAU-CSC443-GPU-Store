@@ -62,6 +62,44 @@ const filterByBrand = async (event) => {
 };
 
 window.onload = async () => {
+    fetch(
+        "https://api.polygon.io/v2/aggs/ticker/AMD/prev?adjusted=true&apiKey=1NiCvEGX5Wu5IswOIbGvex_42Narnqpy"
+    )
+        .then((res) => res.json())
+        .then((data) => {
+            document.querySelector(".amd-stock .stock-price").innerHTML =
+                "$" + data.results[0].h;
+        });
+    setInterval(() => {
+        fetch(
+            "https://api.polygon.io/v2/aggs/ticker/AMD/prev?adjusted=true&apiKey=1NiCvEGX5Wu5IswOIbGvex_42Narnqpy"
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                document.querySelector(".amd-stock .stock-price").innerHTML =
+                    "$" + data.results[0].h;
+            });
+    }, 60000);
+
+    fetch(
+        "https://api.polygon.io/v2/aggs/ticker/NVDA/prev?adjusted=true&apiKey=1NiCvEGX5Wu5IswOIbGvex_42Narnqpy"
+    )
+        .then((res) => res.json())
+        .then((data) => {
+            document.querySelector(".nvidia-stock .stock-price").innerHTML =
+                "$" + data.results[0].h;
+        });
+    setInterval(() => {
+        fetch(
+            "https://api.polygon.io/v2/aggs/ticker/NVDA/prev?adjusted=true&apiKey=1NiCvEGX5Wu5IswOIbGvex_42Narnqpy"
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                document.querySelector(".nvidia-stock .stock-price").innerHTML =
+                    "$" + data.results[0].h;
+            });
+    }, 60000);
+
     const products = await fetchProducts();
     renderProducts(products);
 
