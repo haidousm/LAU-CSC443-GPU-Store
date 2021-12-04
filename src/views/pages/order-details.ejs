@@ -39,6 +39,17 @@
                     <td>$<%= order.total.toFixed(2) %></td>
                 </tr>
             </table>
+            <div class="addresses-container">
+                <h1>Address</h1>
+                <div class="addresses-grid">
+                    <div class="address-container"
+                    style="background: #4bb543">
+                    <p><%- order.address.street %></p>
+                    <p><%- order.address.city %></p>
+                    <p><%- order.address.zip %></p>
+                    <p><%- order.address.country %></p>
+                </div>
+            </div>
         </div>
         <%- include('../partials/footer');%>
         <script src="/account/index.js"></script>
