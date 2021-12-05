@@ -83,11 +83,13 @@ body {
 .hero-inner {
     display: inline-block;
     position: relative;
+    width: 100%;
 }
 
 .hero-section video {
     width: 100%;
     min-height: 100%;
+    background-color: #000;
 }
 
 .hero-content {
@@ -166,6 +168,7 @@ body {
     display: inline-block;
     position: relative;
     color: #fff;
+    width: 100%;
 }
 
 .offerings-inner video {
