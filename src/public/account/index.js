@@ -1,4 +1,4 @@
-const ROOT_URL = "http://localhost:3000";
+const ROOT_URL = "";
 const AUTH_URL = `${ROOT_URL}/auth`;
 const ACCOUNT_URL = `${ROOT_URL}/account`;
 

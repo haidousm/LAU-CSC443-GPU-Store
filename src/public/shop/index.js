@@ -1,4 +1,4 @@
-const API_ROOT = "http://localhost:3000";
+const API_ROOT = "";
 const PRODUCTS_API = `${API_ROOT}/products`;
 
 const PRODUCT_TEMPLATE = ` <div class="product-container {product-brand}-product" onclick="window.location.href='${PRODUCTS_API}/{product-id}'">
