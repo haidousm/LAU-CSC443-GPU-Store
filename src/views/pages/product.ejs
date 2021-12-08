@@ -48,11 +48,11 @@
                             "Content-Type": "application/json",
                         },
                     });
-                    const data = await response.json();
-                    if (data.success) {
+                    if (response.status === 200) {
                         alert("Product added to cart!");
                     } else {
-                        alert("Something went wrong!");
+                        alert("You need an account to add products to cart!");
+                        window.location.href = "/account";
                     }
                 });
             });

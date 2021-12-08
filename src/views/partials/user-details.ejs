@@ -1,7 +1,13 @@
 <div class="user-details-container">
     <h1>Hey, <%- user.firstName + " " + user.lastName %></h1>
     <p>Your email is: <%- user.email %></p>
+    <!-- admin fontawesome icon -->
+    <div style="display: flex; flex-direction: column;">
+    <% if (user.role == "admin") { %>
+       <a href="/admin" style="color: #000;"><i class="fas fa-user-shield"></i>Admin Dashboard</a> 
+    <% } %>
     <a href="/account/logout" style="color: #000;">Logout</a>
+</div>
 
     <div class="addresses-container">
         <h2>Your addresses</h2>

@@ -36,6 +36,7 @@ router.get("/", async (req, res) => {
  * @access Private
  */
 router.post("/:id", async (req, res) => {
+    if (!req.user) return res.status(401).send("Unauthorized");
     let cart = await Cart.findOne({ user: req.user._id });
     if (!cart) {
         cart = new Cart({
@@ -67,6 +68,7 @@ router.post("/:id", async (req, res) => {
  * @access Private
  */
 router.delete("/:id", async (req, res) => {
+    if (!req.user) return res.status(401).send("Unauthorized");
     let cart = await Cart.findOne({ user: req.user._id });
     if (!cart) {
         res.status(404).json({ success: false });

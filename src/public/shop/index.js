@@ -102,24 +102,4 @@ window.onload = async () => {
 
     const products = await fetchProducts();
     renderProducts(products);
-
-    // const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
-    // addToCartButtons.forEach((button) => {
-    //     button.addEventListener("click", async () => {
-    //         const productId = button.getAttribute("data-id");
-    //         const url = `/cart/${productId}`;
-    //         const response = await fetch(url, {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //         });
-    //         const data = await response.json();
-    //         if (data.success) {
-    //             alert("Product added to cart!");
-    //         } else {
-    //             alert("Something went wrong!");
-    //         }
-    //     });
-    // });
 };
